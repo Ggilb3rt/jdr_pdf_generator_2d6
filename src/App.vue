@@ -1,9 +1,26 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
+import html2pdf from 'html2pdf.js/dist/html2pdf.min.js'
+
+
+function exportToPDF () {
+  let lol = document.getElementById('pouet')
+				html2pdf(lol, {
+					margin: 1,
+					filename: 'document.pdf',
+					image: { type: 'jpeg', quality: 0.98 },
+					html2canvas: { dpi: 192, letterRendering: true },
+					jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+				})
+  console.log('exportToPDF fin', ref(document).value)
+}
+
 </script>
 
 <template>
-  <header>
+  <header id="pouet">
+    <button @click="exportToPDF">html2pdf</button>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
